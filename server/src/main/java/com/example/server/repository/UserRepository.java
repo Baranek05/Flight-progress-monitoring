@@ -4,15 +4,17 @@ import com.example.server.model.User;
 
 import org.hibernate.Session;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 @Repository
-public interface UserRepository extends JpaRepository {
-    User getUserData(String username);
+public interface UserRepository extends JpaRepository<User, Integer> {
 
+
+    User getUserData(String username);
+    User findUserByName(String name);
 
     /*
     private EntityManager entityManager;

@@ -1,48 +1,31 @@
-package com.example.server.model;
+package com.example.server.testing;
 
+import jakarta.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
-
+import java.util.Objects;
+/*
 @Entity
-@Table(name = "users", schema = "public", catalog = "postgres")
-public class User {
-
-    @Id
+@Table(name = "users", schema = "server_database", catalog = "railway")
+public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "id")
-    private Integer id;
-
+    private int id;
     @Basic
     @Column(name = "login")
     private String login;
     @Basic
-
     @Column(name = "password")
     private String password;
-
     @Basic
     @Column(name = "name")
     private String name;
-
     @Basic
     @Column(name = "surname")
     private String surname;
-
     @Basic
     @Column(name = "job_details")
     private String jobDetails;
-
-    public User() {}
-
-    public User(String login, String password, String name, String surname) {
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-    }
 
     public int getId() {
         return id;
@@ -91,4 +74,18 @@ public class User {
     public void setJobDetails(String jobDetails) {
         this.jobDetails = jobDetails;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsersEntity that = (UsersEntity) o;
+        return id == that.id && Objects.equals(login, that.login) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(jobDetails, that.jobDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, password, name, surname, jobDetails);
+    }
 }
+*/

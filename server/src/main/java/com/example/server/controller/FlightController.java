@@ -1,12 +1,12 @@
 package com.example.server.controller;
 
 import com.example.server.service.FlightService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.server.model.Flight;
-import com.example.server.repository.FlightRepository;
 import org.springframework.ui.Model;
 
 import java.util.HashMap;
@@ -16,21 +16,20 @@ import java.util.Map;
 @RestController
 public class FlightController {
 
-    private final FlightRepository flightRepository;
+
     private final FlightService flightService;
 
-    public FlightController(FlightRepository flightRepository, FlightService flightService) {
-        this.flightRepository = flightRepository;
+    public FlightController(FlightService flightService) {
         this.flightService = flightService;
     }
 
     private Map<String, List<Flight>> flightsMap() {
-        List<Flight> holdFlights = flightRepository.findFlightByState("hold");
-        List<Flight> approachFlights = flightRepository.findFlightByState("approach");
-        List<Flight> departureFlights = flightRepository.findFlightByState("departure");
-        List<Flight> onStandFlights = flightRepository.findFlightByState("onStand");
-        List<Flight> taxiFlights = flightRepository.findFlightByState("taxi");
-        List<Flight> runwayFlights = flightRepository.findFlightByState("runway");
+        List<Flight> holdFlights = flightService.findFlightByState("hold");
+        List<Flight> approachFlights = flightService.findFlightByState("approach");
+        List<Flight> departureFlights = flightService.findFlightByState("departure");
+        List<Flight> onStandFlights = flightService.findFlightByState("onStand");
+        List<Flight> taxiFlights = flightService.findFlightByState("taxi");
+        List<Flight> runwayFlights = flightService.findFlightByState("runway");
 
         Map<String, List<Flight>> map = new HashMap<>();
         map.put("hold", holdFlights);

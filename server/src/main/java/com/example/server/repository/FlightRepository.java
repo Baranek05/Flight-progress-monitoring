@@ -4,28 +4,37 @@ import com.example.server.model.Flight;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Integer> {
 
-    @Query("SELECT f FROM Flight f WHERE f.state = :state")
+    List<Flight> findByState(String state);
+
+    Flight findById(int id);
+
+    Flight save(Flight flight);
+
+    void deleteById(int id);
+/*
+    //@Query("SELECT f FROM flights f WHERE f.state = :state")
     List<Flight> findFlightByState(String state);
+
 
     List<Flight> findFlightById(int id);
 
-    void addFlight(Flight flight);
 
-    @Query("UPDATE Flight SET state = :state WHERE \"flightID\" = :id")
+    Object save(Flight flight);
+
+
+    @Query("UPDATE flights f SET f.state = :state WHERE f.flightID = :id")
     void updateStateById(int id, String newState);
 
-    @Query("DELETE FROM Flight WHERE \"flightID\" = :id")
-    void deleteFlightById(int id);
+
+    //@Query("DELETE FROM flights f WHERE f.flight = :id")
+    void deleteFlightById(int id); */
 
 }
 

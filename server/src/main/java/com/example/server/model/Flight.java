@@ -3,7 +3,7 @@ package com.example.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "flights")
+@Table(name = "flights", schema = "public", catalog = "postgres")
 public class Flight {
 
     @Id
@@ -17,9 +17,9 @@ public class Flight {
     @Column(name = "state")
     private String state;
 
-    public Flight() {}
+    //public Flight() {}
 
-    public Flight(String flightInfo, String state) {
+    public Flight() {
         this.flightInfo = flightInfo;
         this.state = state;
     }

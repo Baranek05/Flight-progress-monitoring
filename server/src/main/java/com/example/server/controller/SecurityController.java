@@ -3,10 +3,10 @@ package com.example.server.controller;
 import com.example.server.repository.UserRepository;
 import com.example.server.model.User;
 import com.example.server.security.JwtTokenProvider;
+import com.example.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,17 +20,22 @@ public class SecurityController {
     private final UserRepository userRepository;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private final UserService userService;
+
+   // @Autowired
+   // private final AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-    public SecurityController(UserRepository userRepository) {
+    public SecurityController(UserRepository userRepository,/*, AuthenticationManager authenticationManager*/UserService userService) {
         this.userRepository = userRepository;
+        //this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        User user = userRepository.getUser(username);
+        User user = new User();
 
         if (user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found!");

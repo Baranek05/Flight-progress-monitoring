@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-
+/*
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
@@ -29,7 +29,7 @@ public class JwtTokenProvider {
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
-    }
+    } */
 
     // Metoda weryfikująca poprawność tokenu JWT
 
