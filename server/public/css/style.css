@@ -1,0 +1,149 @@
+:root {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+#app {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#979797, #3C3C3C);
+  position: relative;
+}
+#app .modal {
+  background: white;
+  border-radius: 25px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 50px;
+  padding: 60px 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#app .modal .input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#app .modal .input-container .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#app .modal input {
+  display: block;
+  border-radius: 25px;
+  border: none;
+}
+#app .modal input[type=text] {
+  background: #D9D9D9;
+  padding: 10px;
+  width: 200px;
+}
+#app .modal input[type=password] {
+  background: #D9D9D9;
+  padding: 10px;
+  width: 200px;
+}
+
+#app .modal button {
+  background: #85BDFF;
+  display: inline-block;
+  width: fit-content;
+  padding: 10px 20px;
+  border: none;
+}
+
+h1 {
+  color: #85BDFF;
+}
+
+
+.atc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding: 100px;
+  width: 100%;
+
+}
+
+.atc-field {
+  background-color: lightblue;
+  height: 200px;
+  border-radius: 25px;
+  background: #D9D9D9;
+}
+
+.atc-cell {
+  text-align: center;
+}
+
+.row1 {
+  color: #85BDFF
+}
+
+.row2 {
+  color: #90ff92
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.left-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: .5rem;
+}
+
+.nav-button {
+  padding: .1rem;
+  background-color: lightslategray;
+  margin: .1rem auto;
+}
+
+.nav-button img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.clickable {
+  cursor: pointer;
+  padding: .1rem;
+  margin: .1rem auto;
+  border-radius: 50px;
+}
+
+.atc-field {
+  padding: .3rem;
+  color: darkslategrey;
+}
+
+.atc-selected {
+  background-color: aquamarine;
+}
+
+button {
+  border-radius: 25px;
+  background-color: #85BDFF;
+  padding: 1rem 2rem;
+}
+
+a {
+  text-decoration: inherit !important;
+  color: inherit !important;
+  cursor: pointer !important;
+}

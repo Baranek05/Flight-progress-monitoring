@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:3000")
 public class FlightController {
 
 
@@ -42,12 +43,17 @@ public class FlightController {
         return map;
     }
 
+    /*
     @GetMapping("/atc")
     public String atc(Model model) {
         model.addAttribute("flightsMap", flightsMap());
         return "atc";
-    }
+    } */
 
+    @GetMapping("/atc")
+    public ResponseEntity<Map<String, List<Flight>>> getData() {
+        return new ResponseEntity<>(flightsMap(), HttpStatus.OK);
+    }
 
     @PostMapping("/new-flight")
     public ResponseEntity<Flight> createFlight(@RequestBody Flight flight) {

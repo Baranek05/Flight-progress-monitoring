@@ -1,55 +1,44 @@
 package com.example.server.controller;
 
-import com.example.server.repository.UserRepository;
 import com.example.server.model.User;
-import com.example.server.security.JwtTokenProvider;
 import com.example.server.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:63342")
 @RequestMapping("/security")
 public class SecurityController {
 
-    @Autowired
-    private final UserRepository userRepository;
 
-    @Autowired
+
+
+    //@Autowired
     private final UserService userService;
 
    // @Autowired
    // private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    public SecurityController(UserRepository userRepository,/*, AuthenticationManager authenticationManager*/UserService userService) {
-        this.userRepository = userRepository;
-        //this.authenticationManager = authenticationManager;
+
+    public SecurityController(UserService userService) {
+
         this.userService = userService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
+    public ResponseEntity<String> login(@RequestParam String login, @RequestParam String password) {
+        User user = userService.findUserByLogin(login);
 
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found!");
+        if (user != null && user.getPassword().equals(password) && user.getLogin().equals(login)) {
+            URI menuUri = URI.create("/menu");
+            return ResponseEntity.status(HttpStatus.FOUND).location(menuUri).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        if (!user.getLogin().equals(username)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with this login not exist!");
-        }
-
-        if (!user.getPassword().equals(password)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong password!");
-        }
-
-        return ResponseEntity.ok().build();
     }
 }
 
