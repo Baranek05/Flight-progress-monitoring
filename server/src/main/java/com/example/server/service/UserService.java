@@ -16,13 +16,11 @@ public class UserService {
         this.userRepository = userRepository;
     } */
 
-    @Transactional
     public User findUserByLogin(String login) {
         //User user = new User();
         return userRepository.findUserByLogin(login);
     }
 
-    @Transactional
     User findUserByName(String name) {
         return userRepository.findUserByName(name);
     }
