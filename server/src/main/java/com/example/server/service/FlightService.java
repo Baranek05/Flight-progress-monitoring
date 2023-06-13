@@ -15,50 +15,16 @@ public class FlightService {
 
 
 
-
-
-
-    //public Flight updateFlight(Flight existingFlight) {
-
-    //}
-
-/*
-    public List<Flight> getAllFlights() {
-        return flightRepository.findAll();
-    }
-
-    public Flight getFlightById(int id) {
-        return flightRepository.findById(id).orElse(null);
-    }
-
-    public List<Flight> getFlightsByState(String state) {
-        return flightRepository.findFlightByState(state);
-    }
-
-    public Flight createFlight(Flight flight) {
-        return flightRepository.save(flight);
-    }
-
-    public void updateFlightStateById(int id, String newState) {
-        flightRepository.updateStateById(id, newState);
-    }
-
-    public void deleteFlightById(int id) {
-        flightRepository.deleteFlightById(id);
-    } */
-
-
     public List<Flight> findFlightByState(String state) {
-        return null;
+        return flightRepository.findByState(state);
     }
 
-    public List<Flight> findFlightById(int id) {
-        return null;
+    public Flight findFlightById(int id) {
+        return flightRepository.findById(id);
     }
 
     public Flight addFlight(Flight flight){
-        flightRepository.save(flight);
-        return flight;
+        return flightRepository.save(flight);
     }
 
 
@@ -70,7 +36,7 @@ public class FlightService {
 
 
     public boolean deleteFlightById(int id) {
-        //flightRepository.deleteFlightById(id);
+        flightRepository.deleteFlightById(id);
         return true;
     }
 }

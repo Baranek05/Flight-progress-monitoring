@@ -10,25 +10,11 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
 
     Flight findById(int id);
 
-    //Flight save(Flight flight);
+    Flight save(Flight flight);
 
-    void deleteById(int id);
+    //void deleteById(int id);
 
-    /*
-    //@Query("SELECT f FROM flights f WHERE f.state = :state")
-    List<Flight> findFlightByState(String state);
+    void deleteFlightById(int id);
 
 
-    List<Flight> findFlightById(int id);
-
-
-    Object save(Flight flight);
-
-
-    @Query("UPDATE flights f SET f.state = :state WHERE f.flightID = :id")
-    void updateStateById(int id, String newState);
-
-
-    //@Query("DELETE FROM flights f WHERE f.flight = :id")
-    void deleteFlightById(int id); */
 }
