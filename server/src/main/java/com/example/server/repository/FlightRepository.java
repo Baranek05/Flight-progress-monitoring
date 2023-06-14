@@ -10,11 +10,11 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
 
     Flight findById(int id);
 
-    Flight save(Flight flight);
+    //Flight save(Flight flight);
 
-    //void deleteById(int id);
 
-    void deleteFlightById(int id);
+    void deleteById(int id);
+
 
 
 }

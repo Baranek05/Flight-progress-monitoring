@@ -1,6 +1,9 @@
 package com.example.server.controller;
 
+//import com.example.server.service.FlightService;
 import com.example.server.service.FlightService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +17,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 //@CrossOrigin(origins = "http://localhost:3000")
 public class FlightController {
 
 
     private final FlightService flightService;
 
-    public FlightController(FlightService flightService) {
-        this.flightService = flightService;
-    }
+    //public FlightController(FlightService flightService) {
+        //this.flightService = flightService;
+   // }
 
     private Map<String, List<Flight>> flightsMap() {
         List<Flight> holdFlights = flightService.findFlightByState("hold");
@@ -43,12 +47,7 @@ public class FlightController {
         return map;
     }
 
-    /*
-    @GetMapping("/atc")
-    public String atc(Model model) {
-        model.addAttribute("flightsMap", flightsMap());
-        return "atc";
-    } */
+
 
     @GetMapping("/atc")
     public ResponseEntity<Map<String, List<Flight>>> getData() {
@@ -61,13 +60,7 @@ public class FlightController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFlight);
     }
 
-    /* @PostMapping("/flight/{id}")
-    public Flight updateFlight(@PathVariable int id, @RequestParam("newState") String newState) {
-        Flight flight = (Flight) flightService.findFlightById(id);
-        flight.setState(newState);
-        flightService.addFlight(flight);
-        return flight;
-    } */
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Flight> updateFlightState(@PathVariable("id") int id, @RequestParam("state") String state) {

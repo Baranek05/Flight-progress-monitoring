@@ -4,19 +4,24 @@ const passwordInput = document.getElementById('password')
 
 
 loginButton.addEventListener('click', event => {
-    const formData = new FormData()
-    console.log("test")
-    formData.append('username', usernameInput.value)
-    formData.append('password', passwordInput.value)
-    fetch('/login', {
+    event.preventDefault(); // prevent the form from being submitted normally
+    const data = {
+        login: usernameInput.value,
+        password: passwordInput.value
+    };
+    fetch('/security/login', {
         method: 'POST',
-        body: formData,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }).then(response => response.json())
+        .then(data => {
+            setCookie('sessionStarted', Date.now(), 310);
+            setCookie('user', usernameInput.value, 310);
+        });
+});
 
-    }).then(response => {
-            setCookie('sessionStarted', Date.now(), 310)
-            setCookie('user', usernameInput.value, 310)
-    })
-})
 
 
 function setCookie(cname, cvalue, exmins) {
