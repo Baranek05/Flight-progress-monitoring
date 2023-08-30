@@ -1,24 +1,14 @@
-package com.example.server.controller;
+package com.example.server.security.auth;
 
-import com.example.server.model.User;
-import com.example.server.security.AuthenticationRequest;
-import com.example.server.security.AuthenticationResponse;
-import com.example.server.security.AuthenticationService;
-import com.example.server.service.UserService;
+import com.example.server.user.UserService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.authentication.AuthenticationManager;
-
-import java.net.URI;
 
 @RestController
 @AllArgsConstructor
 //@CrossOrigin(origins = "http://localhost:63342")
-@RequestMapping("/security")
+@RequestMapping("/api")
 public class SecurityController {
 
 

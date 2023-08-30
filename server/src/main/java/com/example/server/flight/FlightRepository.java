@@ -1,6 +1,5 @@
-package com.example.server.repository;
+package com.example.server.flight;
 
-import com.example.server.model.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

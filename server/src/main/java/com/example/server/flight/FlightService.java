@@ -1,7 +1,7 @@
-package com.example.server.service;
+package com.example.server.flight;
 
-import com.example.server.model.Flight;
-import com.example.server.repository.FlightRepository;
+import com.example.server.flight.Flight;
+import com.example.server.flight.FlightRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

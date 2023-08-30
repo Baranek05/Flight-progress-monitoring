@@ -1,22 +1,17 @@
-package com.example.server.controller;
+package com.example.server.flight;
 
-//import com.example.server.service.FlightService;
-import com.example.server.service.FlightService;
+//import com.example.server.flight.FlightService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.server.model.Flight;
-import org.springframework.ui.Model;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 @AllArgsConstructor
 //@CrossOrigin(origins = "http://localhost:3000")
 public class FlightController {
