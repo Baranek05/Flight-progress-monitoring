@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 @Service
 public class JWTService {
-    private static final String SECRET_KEY= "";
+    private static final String SECRET_KEY= "4125442A462D4A614E645267556B58703273357638792F423F4528482B4B6250";
     private final long expirationTime = 1000*60*60*10;
     private final long refreshExpirationTime = 1000*60*60*24*7;
 
