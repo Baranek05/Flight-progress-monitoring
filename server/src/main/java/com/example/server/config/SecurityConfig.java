@@ -25,7 +25,7 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
     private static final String[] AUTH_WHITELIST = {
-            "/api/**"
+            "/api/auth/**"
     };
 
     @Bean

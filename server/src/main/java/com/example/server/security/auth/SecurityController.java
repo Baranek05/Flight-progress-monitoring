@@ -1,25 +1,22 @@
 package com.example.server.security.auth;
 
 import com.example.server.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @AllArgsConstructor
-//@CrossOrigin(origins = "http://localhost:63342")
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public class SecurityController {
 
-
-
-
-    //@Autowired
-    private final UserService userService;
     private final AuthenticationService authenticationService;
 
-   // @Autowired
-   //private final AuthenticationManager authenticationManager;
+
    @PostMapping("/register")
    public ResponseEntity<AuthenticationResponse> register(
            @RequestBody RegisterRequest request) {
@@ -39,6 +36,14 @@ public class SecurityController {
 
         return ResponseEntity.ok(authenticationService.authenticate(request));
    }
+
+    @PostMapping("/refresh-token")
+    public void refreshToken(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )throws IOException {
+        authenticationService.refreshToken(request,response);
+    }
     /*
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String login, @RequestParam String password) {

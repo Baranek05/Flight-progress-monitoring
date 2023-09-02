@@ -50,7 +50,6 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user,token);
         log.info("test");
-        //emailService.send(user.getEmail(),"Someone registered with your email");
         return AuthenticationResponse.builder(
                 )
                 .token(token)

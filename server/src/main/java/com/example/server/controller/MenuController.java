@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/menu")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class MenuController {
 /*

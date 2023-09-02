@@ -1,7 +1,6 @@
 package com.example.server.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public User getUserById(Long id) {
+    public Object getUserById(Long id) {
         return userRepository.findById(id).orElseThrow( () -> new UsernameNotFoundException("User not found"));
     }
 
