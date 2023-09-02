@@ -5,14 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
 @RestController
+@RequestMapping("/api")
 //@CrossOrigin(origins = "http://localhost:3000")
 public class MenuController {
-
+/*
     @GetMapping
     public String menu() {
         // Renderowanie strony menu lub wyświetlanie odpowiednich danych
@@ -25,7 +27,7 @@ public class MenuController {
         // Przekierowanie do kolejnego endpointa
         URI atcUri = URI.create("/atc");
         return ResponseEntity.status(HttpStatus.FOUND).location(atcUri).build();
-    }
+    } */
 
     @GetMapping("/logout")
     public ResponseEntity<String> logout() {

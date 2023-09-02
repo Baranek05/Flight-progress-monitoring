@@ -32,8 +32,8 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
     @Basic
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "lastname")
+    private String lastname;
     @Basic
     @Column(name = "job_details")
     private String jobDetails;
@@ -68,9 +68,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
-    }
+    public boolean isEnabled() { return false; }
 
 
     @Override
@@ -78,11 +76,11 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User that = (User) o;
-        return id == that.id && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(jobDetails, that.jobDetails);
+        return id == that.id && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(lastname, that.lastname) && Objects.equals(jobDetails, that.jobDetails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password, name, surname, jobDetails);
+        return Objects.hash(id, email, password, name, lastname, jobDetails);
     }
 }

@@ -20,9 +20,14 @@ public class SecurityController {
 
    // @Autowired
    //private final AuthenticationManager authenticationManager;
+   @PostMapping("/register")
+   public ResponseEntity<AuthenticationResponse> register(
+           @RequestBody RegisterRequest request) {
+       return ResponseEntity.ok(authenticationService.register(request));
+   }
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+   @PostMapping("/login")
+   public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
         /* User user = userService.findUserByLogin(loginUser.getLogin());
 
         if (user != null && user.getPassword().equals(loginUser.getPassword()) && user.getLogin().equals(loginUser.getLogin())) {
@@ -33,7 +38,7 @@ public class SecurityController {
         } */
 
         return ResponseEntity.ok(authenticationService.authenticate(request));
-    }
+   }
     /*
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String login, @RequestParam String password) {

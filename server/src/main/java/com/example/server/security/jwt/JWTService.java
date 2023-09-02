@@ -43,12 +43,12 @@ public class JWTService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS256, getSigningKey()) //!
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256) //!
                 .compact();
     }
 
     public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims,userDetails,expirationTime);
+        return buildToken(extraClaims, userDetails, expirationTime);
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails){
