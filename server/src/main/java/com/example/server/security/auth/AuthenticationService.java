@@ -46,14 +46,15 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userService.addUser(user);
+        //var user = userService.getUserByEmail(request.getEmail());
         var token = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user,token);
         log.info("test");
-        return AuthenticationResponse.builder(
-                )
+        return AuthenticationResponse.builder()
                 .token(token)
                 .refreshToken(refreshToken)
+                .user(user)
                 .build();
     }
 

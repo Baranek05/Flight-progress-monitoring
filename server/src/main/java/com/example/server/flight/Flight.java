@@ -1,9 +1,13 @@
 package com.example.server.flight;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "flights", schema = "public", catalog = "postgres")
 public class Flight {
@@ -16,31 +20,8 @@ public class Flight {
     private String flightInfo;
     @Basic
     @Column(name = "state")
-    private String state;
+    private FlightState state;
 
-    public int getFlightId() {
-        return flightId;
-    }
-
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
-    }
-
-    public String getFlightInfo() {
-        return flightInfo;
-    }
-
-    public void setFlightInfo(String flightInfo) {
-        this.flightInfo = flightInfo;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
     @Override
     public boolean equals(Object o) {

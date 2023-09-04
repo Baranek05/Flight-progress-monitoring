@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/flights")
@@ -19,10 +20,7 @@ public class FlightController {
 
     private final FlightService flightService;
 
-    //public FlightController(FlightService flightService) {
-        //this.flightService = flightService;
-   // }
-
+/*
     private Map<String, List<Flight>> flightsMap() {
         List<Flight> holdFlights = flightService.findFlightByState("hold");
         List<Flight> approachFlights = flightService.findFlightByState("approach");
@@ -40,12 +38,31 @@ public class FlightController {
         map.put("runway", runwayFlights);
 
         return map;
+    } */
+
+    private Map<FlightState, List<Flight>> flightsMap() {
+        List<Flight> holdFlights = flightService.findFlightByState(FlightState.HOLD);
+        List<Flight> approachFlights = flightService.findFlightByState(FlightState.APPROACH);
+        List<Flight> departureFlights = flightService.findFlightByState(FlightState.DEPARTURE);
+        List<Flight> onStandFlights = flightService.findFlightByState(FlightState.ONSTAND);
+        List<Flight> taxiFlights = flightService.findFlightByState(FlightState.TAXI);
+        List<Flight> runwayFlights = flightService.findFlightByState(FlightState.RUNWAY);
+
+        Map<FlightState, List<Flight>> map = new HashMap<>();
+        map.put(FlightState.HOLD, holdFlights);
+        map.put(FlightState.APPROACH, approachFlights);
+        map.put(FlightState.DEPARTURE, departureFlights);
+        map.put(FlightState.ONSTAND, onStandFlights);
+        map.put(FlightState.TAXI, taxiFlights);
+        map.put(FlightState.RUNWAY, runwayFlights);
+
+        return map;
     }
 
 
 
     @GetMapping("/atc")
-    public ResponseEntity<Map<String, List<Flight>>> getData() {
+    public ResponseEntity<Map<FlightState, List<Flight>>> getData() {
         return new ResponseEntity<>(flightsMap(), HttpStatus.OK);
     }
 
@@ -58,10 +75,10 @@ public class FlightController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Flight> updateFlightState(@PathVariable("id") int id, @RequestParam("state") String state) {
+    public ResponseEntity<Optional<Flight>> updateFlightState(@PathVariable("id") int id, @RequestParam("state") FlightState state) {
         boolean updated = flightService.updateStateById(id, state);
         if (updated) {
-            Flight updatedFlight = (Flight) flightService.findFlightById(id);
+            Optional<Flight> updatedFlight = flightService.findFlightById(id);
             return ResponseEntity.ok(updatedFlight);
         } else {
             return ResponseEntity.notFound().build();
