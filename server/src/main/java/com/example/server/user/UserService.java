@@ -10,7 +10,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void addUser(User user) {
-        //check if email is already in use
         if(userRepository.findByEmail(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -26,8 +25,5 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public Object getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow( () -> new UsernameNotFoundException("User not found"));
-    }
 
 }
