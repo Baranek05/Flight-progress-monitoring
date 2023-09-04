@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +35,9 @@ public class User implements UserDetails {
     @Basic
     @Column(name = "lastname")
     private String lastname;
+    @Basic
+    @Column
+    private LocalDateTime lastLoginTime;
     @Basic
     @Column(name = "job_details")
     private String jobDetails;

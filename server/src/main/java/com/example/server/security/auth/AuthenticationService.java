@@ -17,13 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -46,7 +43,6 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userService.addUser(user);
-        //var user = userService.getUserByEmail(request.getEmail());
         var token = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user,token);
@@ -54,7 +50,6 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(token)
                 .refreshToken(refreshToken)
-                .user(user)
                 .build();
     }
 
@@ -65,9 +60,10 @@ public class AuthenticationService {
         );
         var user = userService.getUserByEmail(request.getEmail());
         var token = jwtService.generateToken(user);
+        user.setLastLoginTime(LocalDateTime.now());
+        userService.updateUser(user);
         revokeTokens(user);
         saveUserToken(user,token);
-        //emailService.send(user.getEmail(),"Someone logged in with your email");
         return AuthenticationResponse.builder()
                 .token(token)
                 .build();
@@ -120,21 +116,3 @@ public class AuthenticationService {
     }
 }
 
-/*
-@Service
-@RequiredArgsConstructor
-public class AuthenticationService {
-
-
-    private final UserService userService;
-    private final AuthenticationManager authenticationManager;
-
-    public AuthenticationResponse authenticate(AuthenticationRequest request){
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getLogin(),request.getPassword())
-        );
-        var user = userService.findUserByLogin(request.getLogin());
-
-        return AuthenticationResponse.builder().build();
-    }
-} */

@@ -1,14 +1,16 @@
 package com.example.server.session;
 
+import com.example.server.user.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+
 @Service
 public class SessionService {
 
-    public Session getUserLoginTimes() {
-        LocalDateTime loginTime = LocalDateTime.now();
+    public Session getUserLoginTimes(User user) {
+        LocalDateTime loginTime = user.getLastLoginTime();
         LocalDateTime breakStartTime = loginTime.plusHours(2);
         LocalDateTime breakEndTime = loginTime.plusHours(3);
         LocalDateTime shiftEndTime = loginTime.plusHours(5);

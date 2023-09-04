@@ -1,7 +1,5 @@
 package com.example.server.security.jwt.token;
 
-import com.example.server.security.jwt.token.Token;
-import com.example.server.security.jwt.token.TokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

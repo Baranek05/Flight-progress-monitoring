@@ -1,6 +1,5 @@
 package com.example.server.security.auth;
 
-import com.example.server.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -15,9 +14,10 @@ import java.io.IOException;
 public class SecurityController {
 
     private final AuthenticationService authenticationService;
+    private final LogoutService logoutService;
 
 
-   @PostMapping("/register")
+    @PostMapping("/register")
    public ResponseEntity<AuthenticationResponse> register(
            @RequestBody RegisterRequest request) {
        return ResponseEntity.ok(authenticationService.register(request));
@@ -25,15 +25,6 @@ public class SecurityController {
 
    @PostMapping("/login")
    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
-        /* User user = userService.findUserByLogin(loginUser.getLogin());
-
-        if (user != null && user.getPassword().equals(loginUser.getPassword()) && user.getLogin().equals(loginUser.getLogin())) {
-            URI menuUri = URI.create("/menu");
-            return ResponseEntity.status(HttpStatus.FOUND).location(menuUri).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } */
-
         return ResponseEntity.ok(authenticationService.authenticate(request));
    }
 
@@ -44,18 +35,6 @@ public class SecurityController {
     )throws IOException {
         authenticationService.refreshToken(request,response);
     }
-    /*
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String login, @RequestParam String password) {
-        User user = userService.findUserByLogin(login);
 
-        if (user != null && user.getPassword().equals(password) && user.getLogin().equals(login)) {
-            URI menuUri = URI.create("/menu");
-            return ResponseEntity.status(HttpStatus.FOUND).location(menuUri).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-    } */
 }
 
