@@ -14,7 +14,6 @@ import java.io.IOException;
 public class SecurityController {
 
     private final AuthenticationService authenticationService;
-    private final LogoutService logoutService;
 
 
     @PostMapping("/register")

@@ -38,9 +38,6 @@ public class User implements UserDetails {
     @Basic
     @Column
     private LocalDateTime lastLoginTime;
-    @Basic
-    @Column(name = "job_details")
-    private String jobDetails;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
@@ -80,11 +77,11 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User that = (User) o;
-        return id == that.id && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(lastname, that.lastname) && Objects.equals(jobDetails, that.jobDetails);
+        return id == that.id && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password, name, lastname, jobDetails);
+        return Objects.hash(id, email, password, name, lastname);
     }
 }
